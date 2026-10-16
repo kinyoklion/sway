@@ -124,6 +124,7 @@ sway_sources = files(
 	'commands/workspace_layout.c',
 	'commands/ws_auto_back_and_forth.c',
 	'commands/xwayland.c',
+	'commands/xwayland_scaling.c',
 
 	'commands/bar/bind.c',
 	'commands/bar/binding_mode_indicator.c',
@@ -240,6 +241,7 @@ sway_deps = [
 
 if wlroots_features['xwayland']
 	sway_sources += 'desktop/xwayland.c'
+	sway_sources += 'desktop/xwayland_scaling.c'
 endif
 
 if wlroots_features['libinput_backend']
