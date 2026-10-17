@@ -1,3 +1,52 @@
+# Fork notice
+
+This repository is a fork of [sway](https://github.com/swaywm/sway). The
+default branch, `master`, has the upstream code and one additional feature:
+scale control for X11 windows.
+
+## Purpose of the fork
+
+Standard sway shows X11 windows at scale 1. On a HiDPI output, sway then makes
+the windows larger. The image is not clear.
+
+This fork permits the X11 clients to draw at the scale of the output. Sway then
+shows each window at the correct size, and the image is clear. KDE Plasma uses
+the same method.
+
+The feature adds two configuration commands:
+
+- `xwayland_scaling off|auto|<factor>` sets the scale for the X11 clients. The
+  default is `off`.
+- `xwayland_scale_command <command>` starts a command each time the scale
+  changes. The command gets the scale in the `SWAY_XWAYLAND_SCALE` environment
+  variable.
+
+A change to wlroots is also necessary for this feature. The change is in the
+patch file in `contrib/x11-scaling/wlroots/`. The same change is in the
+`master` branch of [kinyoklion/wlroots](https://github.com/kinyoklion/wlroots).
+
+## Branches
+
+- `master` is the default branch. It has upstream sway and the feature.
+- `x11-scaling` has the feature on the upstream commit of the first tests. Use
+  `master` for new work.
+
+## Related repositories
+
+- [kinyoklion/wlroots](https://github.com/kinyoklion/wlroots): wlroots with
+  the necessary change.
+- [kinyoklion/swayfx](https://github.com/kinyoklion/swayfx): SwayFX with the
+  same feature.
+
+## More information
+
+Read [contrib/x11-scaling/README.md](contrib/x11-scaling/README.md). It gives
+the design, the build procedure, and the test procedure.
+
+The text that follows is the upstream README.
+
+---
+
 # sway
 
 **[English][en]** - [عربي][ar] - [Azərbaycanca][az] - [Česky][cs] - [Deutsch][de] - [Dansk][dk] - [Español][es] - [Français][fr] - [ქართული][ge] - [Ελληνικά][gr] - [हिन्दी][hi] - [Magyar][hu] - [فارسی][ir] - [Italiano][it] - [日本語][ja] - [한국어][ko] - [Nederlands][nl] - [Norsk][no] - [Polski][pl] - [Português][pt] - [Română][ro] - [Русский][ru] - [Српски][sr] - [Svenska][sv] - [Türkçe][tr] - [Українська][uk] - [中文-简体][zh-CN] - [中文-繁體][zh-TW]

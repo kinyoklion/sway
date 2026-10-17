@@ -56,6 +56,9 @@ Then build sway as usual (`meson setup build && ninja -C build`), either
 against an installed patched wlroots or with `subprojects/wlroots` pointing
 at the patched checkout.
 
+The `master` branch of <https://github.com/kinyoklion/wlroots> already has this
+patch. As an alternative, clone that branch and do not apply the patch.
+
 ### NixOS sketch
 
 ```nix
@@ -97,9 +100,10 @@ with `xwayland_scaling auto`. `Mod4+Return` starts `xterm`, `Mod4+d` prints
 
 ## Updating the wlroots patch
 
-From a wlroots checkout with the work on branch `x11-scaling`:
+From a checkout of <https://github.com/kinyoklion/wlroots>, branch `master`,
+with upstream wlroots as the `upstream` remote:
 
 ```
-git format-patch -o ../sway/contrib/x11-scaling/wlroots origin/master..x11-scaling
-git rev-parse origin/master > ../sway/contrib/x11-scaling/wlroots/UPSTREAM_REV
+git format-patch -o ../sway/contrib/x11-scaling/wlroots upstream/master..master
+git rev-parse upstream/master > ../sway/contrib/x11-scaling/wlroots/UPSTREAM_REV
 ```
