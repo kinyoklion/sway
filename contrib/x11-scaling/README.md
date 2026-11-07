@@ -101,9 +101,10 @@ with `xwayland_scaling auto`. `Mod4+Return` starts `xterm`, `Mod4+d` prints
 ## Updating the wlroots patch
 
 From a checkout of <https://github.com/kinyoklion/wlroots>, branch `master`,
-with upstream wlroots as the `upstream` remote:
+with upstream wlroots as the `upstream` remote (`master^` is the feature commit;
+`master` itself only adds the fork notice to the README):
 
 ```
-git format-patch -o ../sway/contrib/x11-scaling/wlroots upstream/master..master
+git format-patch -1 -o ../sway/contrib/x11-scaling/wlroots master^
 git rev-parse upstream/master > ../sway/contrib/x11-scaling/wlroots/UPSTREAM_REV
 ```

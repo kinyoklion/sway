@@ -1,4 +1,4 @@
-From db355c17fd99bbfd07a07b30edaccdfc2b0ce70f Mon Sep 17 00:00:00 2001
+From 7e7c070fb16498c69fc523629b58eb4769fb353f Mon Sep 17 00:00:00 2001
 From: Ryan Lamb <4955475+kinyoklion@users.noreply.github.com>
 Date: Fri, 16 Oct 2026 16:17:32 -0700
 Subject: [PATCH] Add server-side per-client scale override for Xwayland
@@ -29,7 +29,7 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
  create mode 100644 util/server_scale.c
 
 diff --git a/include/wlr/types/wlr_xdg_output_v1.h b/include/wlr/types/wlr_xdg_output_v1.h
-index 4ee8ec3..48c2c1a 100644
+index 4ee8ec3b..48c2c1a8 100644
 --- a/include/wlr/types/wlr_xdg_output_v1.h
 +++ b/include/wlr/types/wlr_xdg_output_v1.h
 @@ -48,4 +48,11 @@ struct wlr_xdg_output_manager_v1 {
@@ -46,7 +46,7 @@ index 4ee8ec3..48c2c1a 100644
  #endif
 diff --git a/include/wlr/util/server_scale.h b/include/wlr/util/server_scale.h
 new file mode 100644
-index 0000000..80bd142
+index 00000000..80bd1425
 --- /dev/null
 +++ b/include/wlr/util/server_scale.h
 @@ -0,0 +1,33 @@
@@ -84,7 +84,7 @@ index 0000000..80bd142
 +
 +#endif
 diff --git a/types/scene/surface.c b/types/scene/surface.c
-index bf4da22..23ba5b5 100644
+index bf4da224..23ba5b53 100644
 --- a/types/scene/surface.c
 +++ b/types/scene/surface.c
 @@ -10,6 +10,8 @@
@@ -153,7 +153,7 @@ index bf4da22..23ba5b5 100644
  	*sy += scene_surface->clip.y;
  
 diff --git a/types/wlr_xdg_output_v1.c b/types/wlr_xdg_output_v1.c
-index 947efa5..3924162 100644
+index 947efa59..39241624 100644
 --- a/types/wlr_xdg_output_v1.c
 +++ b/types/wlr_xdg_output_v1.c
 @@ -1,10 +1,12 @@
@@ -202,7 +202,7 @@ index 947efa5..3924162 100644
  	struct wlr_output_layout_output *layout_output = xdg_output->layout_output;
  	bool updated = false;
 diff --git a/util/meson.build b/util/meson.build
-index 7d3f39d..ced2f14 100644
+index 7d3f39d2..ced2f141 100644
 --- a/util/meson.build
 +++ b/util/meson.build
 @@ -10,6 +10,7 @@ wlr_files += files(
@@ -215,7 +215,7 @@ index 7d3f39d..ced2f14 100644
  	'time.c',
 diff --git a/util/server_scale.c b/util/server_scale.c
 new file mode 100644
-index 0000000..5eb1858
+index 00000000..5eb18586
 --- /dev/null
 +++ b/util/server_scale.c
 @@ -0,0 +1,35 @@
